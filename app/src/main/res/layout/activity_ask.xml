@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/ll_ask"
+    android:background="@color/white"
+    tools:context=".AskActivity">
+
+    <EditText
+        android:layout_width="390dp"
+        android:layout_gravity="center"
+        android:layout_height="150dp"
+        android:paddingStart="20dp"
+        android:textSize="20sp"
+        android:id="@+id/ask_et_question"
+        android:background="@drawable/rounded_rectangle"
+        android:hint="Ask Anything"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/characterlimitalert"
+            android:layout_height="wrap_content"
+            android:text="75 character limit"
+            android:layout_marginStart="14dp"
+            android:textSize="15sp"
+
+            android:textColor="@color/black"/>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_cat"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:hint="category"
+        android:gravity="center_horizontal"
+        android:layout_margin="20dp"/>
+
+    <Spinner
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/spinner_cat"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/bottomnavcolor"
+        android:layout_gravity="center"
+        />
+
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_margin="20dp"
+        android:id="@+id/btn_submit"
+        android:textAllCaps="false"
+        android:background="@drawable/button_back_selector"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"/>
+
+</LinearLayout>

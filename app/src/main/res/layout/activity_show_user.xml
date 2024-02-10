@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ShowUser">
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="User Profile"
+        android:textAlignment="center"
+        android:textColor="@color/bottomnavcolor"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
+                android:elevation="8dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="10dp"
+                app:cardPreventCornerOverlap="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.15"
+                app:layout_constraintStart_toStartOf="parent">
+
+
+                <ImageView
+                    android:id="@+id/imageView_showprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:clickable="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_person"
+                    tools:layout_editor_absoluteX="51dp"
+                    tools:layout_editor_absoluteY="28dp" />
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/followers_cardview"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:clickable="true"
+                    app:cardBackgroundColor="@color/white">
+
+                    <TextView
+                        android:id="@+id/followerNo_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:text="Followers"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/posts_cardview"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:clickable="true"
+                    app:cardBackgroundColor="@color/white">
+
+                    <TextView
+                        android:id="@+id/postsNo_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:text="Posts"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_requestshowprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/button_back_selector"
+                    android:padding="3dp"
+                    android:text="Follow"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawablePadding="20dp"
+        android:padding="5dp"
+        android:paddingStart="20dp"
+        android:text="Name"
+        android:textAlignment="viewStart"
+        android:textColor="@color/grey"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/name_tv_showprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawablePadding="20dp"
+        android:paddingStart="20dp"
+        android:shadowColor="#853A3A"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="15"
+        android:text="******   ******"
+        android:textAlignment="viewStart"
+        android:textColor="#9E0000"
+        android:textSize="15sp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/grey" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawablePadding="20dp"
+        android:padding="5dp"
+        android:paddingStart="20dp"
+        android:text="Hobbies"
+        android:textAlignment="viewStart"
+        android:textColor="@color/textcolorgrey"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/bio_tv_showprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawablePadding="20dp"
+        android:paddingStart="20dp"
+        android:shadowColor="#853A3A"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="15"
+        android:text="**********************"
+        android:textAlignment="viewStart"
+        android:textColor="#9E0000"
+        android:textSize="15sp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/grey" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawablePadding="20dp"
+        android:padding="5dp"
+        android:paddingStart="20dp"
+        android:text="Bio"
+        android:textAlignment="viewStart"
+        android:textColor="@color/textcolorgrey"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/age_tv_showprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawablePadding="20dp"
+        android:paddingStart="20dp"
+        android:shadowColor="#853A3A"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="15"
+        android:text="***************************"
+        android:textAlignment="viewStart"
+        android:textColor="#9E0000"
+        android:textSize="15sp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/grey" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawablePadding="20dp"
+        android:padding="5dp"
+        android:paddingStart="20dp"
+        android:text="Phone Number"
+        android:textAlignment="viewStart"
+        android:textColor="@color/textcolorgrey"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:id="@+id/email_tv_showProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawablePadding="20dp"
+        android:paddingStart="20dp"
+        android:shadowColor="#853A3A"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="15"
+        android:text="**********"
+        android:textAlignment="viewStart"
+        android:textColor="#9E0000"
+        android:textSize="15sp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/grey" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawablePadding="20dp"
+        android:padding="5dp"
+        android:paddingStart="20dp"
+        android:text="Social Media"
+        android:textAlignment="viewStart"
+        android:textColor="@color/textcolorgrey"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:id="@+id/website_tv_showprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:drawablePadding="20dp"
+        android:paddingStart="20dp"
+        android:shadowColor="#853A3A"
+        android:shadowDx="0.0"
+        android:shadowDy="0.0"
+        android:shadowRadius="15"
+        android:text="******************************"
+        android:textAlignment="viewStart"
+        android:textColor="#9E0000"
+        android:textSize="15sp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/grey" />
+
+
+    <TextView
+        android:id="@+id/tv_requestshowprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:text="Profile Hidden. You can see by following..!"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+
+    <Button
+        android:id="@+id/btn_sendmessage_showuser"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/button_back_selector"
+        android:text="Send Message"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/block_reporttv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Block/ Report" />
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</LinearLayout>

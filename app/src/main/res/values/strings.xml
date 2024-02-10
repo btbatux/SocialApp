@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">newSocial Life</string>
+    <string name="title_activity_individual_post">IndividualPost</string>
+    <string name="tab_text_1">Photos</string>
+    <string name="tab_text_2">Videos</string>
+    <string name="tab_text_3">Stories</string>
+    <string name="admin_email_1">admin1@admin.com</string>
+    <string name="admin_email_2">admin@admin.com</string>
+    <string name="admin_email_3">rct-batuhan@hotmail.com</string>
+    <string name="your_terms_and_conditions">
+Privacy Policy
+Last updated: January 31, 2024
+Your security is important to us. Therefore, the personal data you share with us is protected with sensitivity.
+We, hilove, as the data controller, aim to enlighten you with this privacy and personal data protection policy about which of your personal data will be processed for what purpose,
+who and why the processed data can be shared, our data processing methods and legal reasons; and what rights you have regarding the processed data.
+Your Collected Personal Data, Collection Method and Legal Reason
+Your identity (such as name, surname, date of birth), contact (such as address, e-mail address, phone, IP, location), personal, social media, financial information,
+and visual and auditory recordings will be obtained, recorded, stored, and updated through technologies like cookies, by automatic or non-automatic methods
+and sometimes through third parties such as analytic providers, advertising networks, information technology providers, within and for the duration of the
+service and contract relationship with us, based on the legitimate interest processing condition.
+Purpose of Processing Your Personal Data
+The personal data you share with us will be processed and updated in a suitable and measured way for the purpose of establishing contracts with you so that you can
+benefit from our services, fulfilling the requirements of the services we offer in the best way and in accordance with the contracts between us, enabling you to exercise your rights arising from these contracts, developing our products and services in line with your needs and informing you about these developments, also introducing you to broader service providers within legal frameworks, and fulfilling mandatory obligations from law (sharing personal data with judicial and administrative authorities upon request) during the contract and service period.
+To Whom and For What Purposes the Collected Personal Data Can Be Transferred
+The personal data you share with us can be transferred to third parties and institutions and organizations, both domestic and abroad, with whom we have a contractual relationship,
+cooperate, receive or provide services, under the condition that necessary technical and administrative measures are taken,
+and when requested, to judicial and administrative authorities.
+Your Rights as a Person Whose Personal Data is Processed
+According to Article 11 of the KVKK, everyone can apply to the data controller to exercise the following rights:
+To learn whether personal data is processed or not,
+If personal data has been processed, to request information about it,
+To learn the purpose of processing personal data and whether they are used appropriately for their purpose,
+To know the third parties in the country or abroad to whom personal data is transferred,
+To request the correction of personal data if it is incomplete or incorrectly processed,
+To request the deletion or destruction of personal data,
+To request notification of the processes carried out in accordance with subparagraphs (e) and (f) to the third parties to whom personal data has been transferred,
+To object to the emergence of a result against the person herself/himself by analyzing the processed data exclusively through automated systems,
+To demand compensation for the damage arising from the unlawful processing of personal data.
+You can contact us at rct-batuhan@hotmail.com to exercise the above-mentioned rights.
+Communication
+To provide services according to your requests, you are completely free to accept or not to accept the processing of only the necessary personal data in accordance with this privacy and personal data processing policy. If you continue to use the application, it will be assumed that you have accepted. If you do not accept, please remove the application from all your devices. For detailed information, please do not hesitate to contact us at the email address rct-batuhan@hotmail.com. </string>
+
+</resources>

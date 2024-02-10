@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AskActivity">
+
+  <androidx.cardview.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/answer_edt"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_rectangle_answer"
+        android:hint="Answer..."
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/amp_gray"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+  </androidx.cardview.widget.CardView>
+
+  <TextView
+      android:id="@+id/maxlenght"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingStart="5dp"
+      android:text="75 character limit"
+      android:textColor="@color/black"
+      android:textSize="15sp"
+      android:textStyle="bold"
+      tools:ignore="HardcodedText,RtlSymmetry">
+
+  </TextView>
+
+  <Button
+        android:id="@+id/btn_answer_submit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:background="@drawable/button_back_selector"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+</LinearLayout>

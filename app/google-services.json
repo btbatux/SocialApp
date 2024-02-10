@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "457582991102",
+    "project_id": "loveday-aceaf",
+    "storage_bucket": "loveday-aceaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457582991102:android:0152aeb9784301b09a37af",
+        "android_client_info": {
+          "package_name": "com.hicome.loveday"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF_vzHsmN0TIy03-KUe7ihSOZZAlW58kE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".UpdateProfile">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal"
+        android:rotationX="14"
+        android:text="Update Profile"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="35sp" />
+
+    <EditText
+        android:id="@+id/et_name_up"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_edit_text"
+        android:layout_margin="4dp"
+        android:drawableLeft="@drawable/ic_person"
+        android:drawablePadding="7dp"
+        android:hint="Name"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/et_profession_up"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_edit_text"
+        android:layout_margin="4dp"
+        android:drawableLeft="@drawable/ic_baseline_work_24"
+        android:drawablePadding="7dp"
+        android:hint="Hobbies"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/et_bio_up"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_edit_text"
+        android:layout_margin="4dp"
+        android:drawableLeft="@drawable/ic_bio"
+        android:drawablePadding="7dp"
+        android:hint="Bio"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/et_email_up"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_edit_text"
+        android:layout_margin="4dp"
+        android:drawableLeft="@drawable/ic_baseline_email_24"
+        android:drawablePadding="7dp"
+        android:hint="Phone"
+        android:paddingStart="5dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/et_web_up"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_edit_text"
+        android:layout_margin="4dp"
+        android:drawableLeft="@drawable/ic_baseline_public_24"
+        android:drawablePadding="7dp"
+        android:hint="Social Media"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black" />
+
+
+    <Button
+        android:id="@+id/btn_up"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_back_selector"
+        android:text="Save Profile"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+</LinearLayout>

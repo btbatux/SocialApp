@@ -38,7 +38,6 @@ public class ChatActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     RecyclerView recyclerView;
     EditText searchEt;
-    CheckVideoCall checkVideoCall;
     DatabaseReference checkVideocallRef;
     String senderuid;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

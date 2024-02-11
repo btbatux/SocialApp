@@ -47,7 +47,6 @@ public class CreateProfile extends AppCompatActivity {
     Button button;
     ImageView imageView;
     TextView termsLink;
-
     ProgressBar progressBar;
     Uri imageUri;
     UploadTask uploadTask;

@@ -5,8 +5,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <!--Radius of all four corners-->
     <corners
-        android:bottomRightRadius="55dp"
-        android:bottomLeftRadius="55dp"
+        android:bottomRightRadius="45dp"
+        android:bottomLeftRadius="45dp"
         android:topLeftRadius="40dp"
         android:topRightRadius="40dp"/>
 

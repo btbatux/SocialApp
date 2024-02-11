@@ -18,7 +18,6 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
 
     TextView sendertv,receivertv;
     ImageView iv_sender,iv_receiver;
-    ImageButton playsender,playreceiver;
     public MessageViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -97,13 +96,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
                 iv_receiver.setVisibility(View.GONE);
             }
 
-
-
         }
-
-
     }
-
-
 
 }

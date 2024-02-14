@@ -1,4 +1,6 @@
 package com.hicome.loveday;
+import static android.app.PendingIntent.getActivity;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -22,6 +24,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -546,42 +549,39 @@ public class MessageActivity extends AppCompatActivity {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PermissionListener permissionListener = new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted() {
-                        if (type.equals("i")) {
-                            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(imageuri));
-                            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI |
-                                    DownloadManager.Request.NETWORK_MOBILE);
-                            request.setTitle("Download");
-                            request.setDescription("Downloading image....");
-                            request.allowScanningByMediaScanner();
-                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, sendername + System.currentTimeMillis() + ".jpg");
-                            DownloadManager manager = (DownloadManager) MessageActivity.this.getSystemService(Context.DOWNLOAD_SERVICE);
-                            manager.enqueue(request);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (!Environment.isExternalStorageManager()) {
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                        Uri uri = Uri.fromParts("package", getApplicationContext().getPackageName(), null);
+                        intent.setData(uri);
+                        startActivity(intent);
+                    } else {
+                        startDownloadProcess(imageuri);
+                    }
+                }else {
+                    // TedPermission ile izin isteme işlemi
+                    TedPermission.with(getApplicationContext())
+                            .setPermissionListener(new PermissionListener() {
+                                @Override
+                                public void onPermissionGranted() {
+                                    // İzinler verildiğinde indirme işlemi başlatılacak
+                                    startDownloadProcess(imageuri);
+                                }
 
-                            Toast.makeText(MessageActivity.this, "downloaded", Toast.LENGTH_SHORT).show();
-
-                            dialog.dismiss();
+                                @Override
+                                public void onPermissionDenied(List<String> deniedPermissions) {
+                                    // İzinler reddedildiğinde kullanıcıya bilgi verilecek
+                                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                            .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+                            .check();
+                }
 
                         }
-                    }
-                    @Override
-                    public void onPermissionDenied(List<String> deniedPermissions) {
 
-                        Toast.makeText(MessageActivity.this, "error", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                };
-                TedPermission.with(MessageActivity.this)
-                        .setPermissionListener(permissionListener)
-                        .setPermissions(Manifest.permission.INTERNET, Manifest.permission.READ_EXTERNAL_STORAGE)
-                        .check();
 
-                dialog.dismiss();
-
-            }
         });
 
 
@@ -591,6 +591,23 @@ public class MessageActivity extends AppCompatActivity {
         dialog.getWindow().getAttributes().windowAnimations = R.style.Bottomanim;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
+    }
+
+
+    private void startDownloadProcess(String url) {
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+        request.setTitle("MessagePicDownload");
+        String appNameDownload = getResources().getString(R.string.app_name);
+
+        request.setDescription(appNameDownload);
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        String fileExtension = ".jpg";
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,  + System.currentTimeMillis() + fileExtension);
+        DownloadManager manager = (DownloadManager) getApplicationContext().getSystemService(Context.DOWNLOAD_SERVICE);
+        manager.enqueue(request);
+        Toast.makeText(getApplicationContext(), "Downloading", Toast.LENGTH_SHORT).show();
     }
 
     String sender_name;

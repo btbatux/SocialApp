@@ -43,7 +43,7 @@
                             android:id="@+id/iv_que_user"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/ic_person"
+                            android:src="@drawable/ic_person"
                             android:clickable="true"
                             android:scaleType="fitCenter" />
 

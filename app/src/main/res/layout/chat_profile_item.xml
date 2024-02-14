@@ -4,9 +4,10 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="10dp"
-    android:id="@+id/cv_chat_profile"
-    android:layout_margin="5dp">
+    app:cardCornerRadius="10dip"
+    app:cardElevation="9dp"
+    android:layout_margin="3dp"
+    android:id="@+id/cv_chat_profile">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/iv_ch_item"
-                    android:background="@drawable/ic_person"
+                    android:src="@drawable/ic_person"
                     android:clickable="true"
                     android:scaleType="fitCenter"/>
 
@@ -48,28 +49,28 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/bottomnavcolor"
                 android:id="@+id/send_messagech_item_btn"
                 android:text="Send Message"
-                android:layout_gravity="right"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:paddingStart="5dp"
-                android:textColor="@color/textcolorgrey"
-                android:id="@+id/name_ch_item_tv"
-                android:hint="name" />
+                android:layout_gravity="end"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
+                android:paddingStart="6dp"
                 android:textColor="@color/black"
+                android:id="@+id/name_ch_item_tv"
+                android:text="name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/grey"
                 android:id="@+id/ch_itemprof_tv"
-                android:paddingStart="5dp"
+                android:paddingStart="6dp"
                 android:hint="questions" />
 
 

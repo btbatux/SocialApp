@@ -146,7 +146,7 @@
             android:drawablePadding="20dp"
             android:padding="5dp"
             android:paddingLeft="20dp"
-            android:text="Email"
+            android:text="Phone Number"
             android:textColor="@color/textcolorgrey"
             android:textSize="15sp" />
 
@@ -157,7 +157,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:padding="5dp"
-            android:text="Email"
+            android:clickable="true"
+            android:inputType="phone"
+            android:text="Phone Number"
             android:textColor="@color/black"
             android:textSize="16sp" />
 

@@ -111,6 +111,15 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
 
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+        emailEt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phoneNumber = emailEt.getText().toString();
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
+                startActivity(dialIntent);
+            }
+        });
     }
 
     private void loadUserProfile() {
@@ -293,14 +302,17 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
             case R.id.tv_web_f1:
                 try {
                     String url = webEt.getText().toString();
+
+                    if (!url.startsWith("https://")) {
+                        url = "https://" + url;
+                    }
+
                     Intent intent2 = new Intent(Intent.ACTION_VIEW);
                     intent2.setData(Uri.parse(url));
                     startActivity(intent2);
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), "Invalid Url", Toast.LENGTH_SHORT).show();
                 }
-
-                break;
         }
     }
 

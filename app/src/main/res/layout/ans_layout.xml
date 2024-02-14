@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="280dp"
     android:layout_marginTop="2dp"
-    app:cardElevation="12dp"
+    app:cardElevation="9dp"
+    app:cardCornerRadius="5dip"
     app:cardBackgroundColor="@color/white"
     android:layout_height="wrap_content">
 
@@ -66,40 +68,47 @@
             android:text="Answer"
             android:padding="4dp"
             android:textColor="@color/black"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:layout_marginLeft="15dp"
             android:id="@+id/tv_ans"/>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_vote_ans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="UP"
-                android:textSize="12sp"
-                android:textColor="@color/retrycolor"
+                android:layout_marginEnd="24dp"
                 android:clickable="true"
-                android:id="@+id/tv_vote_ans"
                 android:padding="4dp"
-                />
+                android:text="UP"
+                android:textColor="@color/retrycolor"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_vote_no"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="viewEnd"
-                android:text="VOTES"
-                android:textSize="12sp"
-                android:textColor="@color/bottomnavcolor"
-                android:clickable="true"
                 android:id="@+id/tv_vote_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:clickable="true"
                 android:padding="4dp"
-                />
+                android:text="Votes"
+                android:textAlignment="viewStart"
+                android:textColor="@color/bottomnavcolor"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

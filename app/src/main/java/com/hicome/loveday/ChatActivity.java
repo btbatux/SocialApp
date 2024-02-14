@@ -19,6 +19,12 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +48,7 @@ public class ChatActivity extends AppCompatActivity {
     String senderuid;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String currentuid = user.getUid();
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +58,10 @@ public class ChatActivity extends AppCompatActivity {
 
         searchEt = findViewById(R.id.search_userch);
         recyclerView = findViewById(R.id.rv_ch);
+        mAdView = findViewById(R.id.adView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
         profileRef = database.getReference("All Users");
-
-        checkIncoming();
 
         searchEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -123,32 +129,28 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+        //chat activity banner reklam init.
+        MobileAds.initialize(getApplication(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        //Test reklam id'si(yayınlamadan önce değiştir)
+        AdView adView = new AdView(getApplication());
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        //Banner XML id'bağla
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-
-        PermissionListener permissionListener = new PermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-
-
-            }
-
-            @Override
-            public void onPermissionDenied(List<String> deniedPermissions) {
-
-                Intent intent = new Intent(ChatActivity.this,MainActivity.class);
-                startActivity(intent);
-
-            }
-        };
-        TedPermission.with(ChatActivity.this)
-                .setPermissionListener(permissionListener)
-                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.RECORD_AUDIO)
-                .check();
 
 
         FirebaseRecyclerOptions<All_UserMmber> options1 =
@@ -197,43 +199,6 @@ public class ChatActivity extends AppCompatActivity {
 
         firebaseRecyclerAdapter1.startListening();
         recyclerView.setAdapter(firebaseRecyclerAdapter1);
-
-
-    }
-
-    public void checkIncoming(){
-
-        checkVideocallRef = database.getReference("vc");
-
-
-        try {
-
-            checkVideocallRef.child(currentuid).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    if (snapshot.exists()){
-
-                        senderuid = snapshot.child("calleruid").getValue().toString();
-                        Intent intent = new Intent(ChatActivity.this,VideoCallinComing.class);
-                        intent.putExtra("uid",senderuid );
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }else {
-
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }catch (Exception e){
-
-            //   Toast.makeText(context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        }
 
 
     }

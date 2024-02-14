@@ -4,29 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/registerbackround"
     android:gravity="center"
     android:orientation="vertical"
-    android:rotation="0"
-    android:rotationX="0"
-    android:rotationY="0"
     tools:context=".RegisterActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:rotationX="8"
-        android:text="Create Account"
-        android:textColor="@color/retrycolor"
-        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/register_email_et"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"
-        android:background="@drawable/custom_input"
+        android:background="@drawable/custom_input2"
         android:drawableStart="@drawable/email_focused"
         android:drawableLeft="@drawable/custom_email_input"
         android:drawablePadding="10dp"
@@ -34,7 +23,7 @@
         android:inputType="textEmailAddress"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHint="@color/grey" />
 
     <EditText
@@ -42,7 +31,7 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"
-        android:background="@drawable/custom_input"
+        android:background="@drawable/custom_input2"
         android:drawableStart="@drawable/custom_pass_input"
         android:drawableLeft="@drawable/custom_email_input"
         android:drawablePadding="10dp"
@@ -50,7 +39,7 @@
         android:inputType="text"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHint="@color/grey" />
 
     <EditText
@@ -58,7 +47,7 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_margin="10dp"
-        android:background="@drawable/custom_input"
+        android:background="@drawable/custom_input2"
         android:drawableStart="@drawable/custom_pass_input"
         android:drawableLeft="@drawable/custom_email_input"
         android:drawablePadding="10dp"
@@ -66,7 +55,7 @@
         android:inputType="text"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHint="@color/grey" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,44 +67,77 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:buttonTint="@color/retrycolor"
+            android:buttonTint="@color/bottomsheetcolor"
             android:text="Show Password"
-            android:textColor="@color/retrycolor"
+            android:textColor="@color/bottomsheetcolor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <Button
-        android:id="@+id/button_register"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/button_back_selector"
-        android:text="Sign in"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
-
-    <Button
-        android:id="@+id/signup_to_login"
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/button_back_selector"
-        android:text="Login"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
-    <ProgressBar
-        android:id="@+id/progressbar_register"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/white"
-        android:visibility="invisible" />
+        android:layout_height="250dp"
+        android:gravity="center"
+
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="183dp"
+            android:layout_marginEnd="97dp"
+            android:background="@drawable/button_back_selector"
+            android:text="Sign in"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/signup_to_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/signup_to_login"
+            android:layout_width="240dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:layout_marginStart="76dp"
+            android:layout_marginEnd="143dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_back_selector"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="70dp">
+
+       <ProgressBar
+           android:id="@+id/progressbar_register"
+           style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="3dp"
+
+           android:indeterminate="true"
+           android:indeterminateTint="#FFFB00"
+           android:visibility="invisible"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.0"
+           app:layout_constraintStart_toStartOf="parent" />
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

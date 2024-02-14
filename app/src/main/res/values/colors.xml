@@ -11,5 +11,6 @@
     <color name="retrycolor">#0E33FF</color>
   <color name="white">#ffffff</color>
   <color name="bottomnavcolor">#B9590CC1</color>
+  <color name="bottomnavcolor2">#81FC8ABE</color>
   <color name="bottomsheetcolor">#FFB84C</color>
 </resources>

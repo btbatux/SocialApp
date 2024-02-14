@@ -546,14 +546,10 @@ public class MessageActivity extends AppCompatActivity {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 PermissionListener permissionListener = new PermissionListener() {
                     @Override
                     public void onPermissionGranted() {
-
                         if (type.equals("i")) {
-
                             DownloadManager.Request request = new DownloadManager.Request(Uri.parse(imageuri));
                             request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI |
                                     DownloadManager.Request.NETWORK_MOBILE);
@@ -571,7 +567,6 @@ public class MessageActivity extends AppCompatActivity {
 
                         }
                     }
-
                     @Override
                     public void onPermissionDenied(List<String> deniedPermissions) {
 

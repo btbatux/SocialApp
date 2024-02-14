@@ -13,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:text="Login Page"
+        android:text="Login"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:textSize="25sp" />
 
     <!-- Email Input -->
     <com.google.android.material.textfield.TextInputEditText

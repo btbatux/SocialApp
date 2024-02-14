@@ -47,7 +47,7 @@
             android:layout_margin="5dp"
             android:visibility="invisible"
             android:id="@+id/typingstatus"
-            android:text="is typing..."
+            android:text="is here..."
             android:textSize="15sp"
             android:textColor="@color/start" />
 

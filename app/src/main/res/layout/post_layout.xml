@@ -7,7 +7,7 @@
     android:layout_margin="5dp"
     app:cardCornerRadius="9dp"
     android:id="@+id/cv_post"
-    app:cardElevation="11dp"
+    app:cardElevation="10dp"
     app:cardBackgroundColor="@color/white"
     android:layout_height="wrap_content">
 
@@ -103,45 +103,52 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
-
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_dislike"
-                android:background="@android:color/transparent"
-                android:padding="5dp"
                 android:id="@+id/likebutton_posts"
-                android:layout_marginLeft="10dp"/>
-
-            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_comment"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="16dp"
                 android:background="@android:color/transparent"
                 android:padding="5dp"
+                android:src="@drawable/ic_dislike"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/commentbutton_posts"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <ImageButton
                 android:id="@+id/commentbutton_posts"
-                android:layout_marginLeft="10dp"/>
-
-            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/moreoptions"
+                android:layout_marginEnd="16dp"
                 android:background="@android:color/transparent"
                 android:padding="5dp"
+                android:src="@drawable/ic_comment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/morebutton_posts"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <ImageButton
                 android:id="@+id/morebutton_posts"
-                android:layout_marginLeft="10dp"/>
-
-
-
-        </LinearLayout>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="247dp"
+                android:background="@android:color/transparent"
+                android:padding="5dp"
+                android:src="@drawable/moreoptions"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

@@ -20,20 +20,20 @@
 
     <Button
         android:id="@+id/btn_choosefile_post"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
+        android:layout_width="190dp"
+        android:layout_height="40dp"
         android:layout_margin="5dp"
         android:background="@drawable/button_back_selector"
         android:text="Choose any file"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.693" />
+        app:layout_constraintVertical_bias="0.791" />
 
     <ProgressBar
         android:id="@+id/pb_post"
@@ -45,37 +45,37 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintVertical_bias="0.952" />
 
     <Button
         android:id="@+id/btn_uploadfile_post"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:layout_margin="5dp"
         android:background="@drawable/button_back"
         android:text="Upload"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78" />
+        app:layout_constraintVertical_bias="0.865" />
 
     <EditText
         android:id="@+id/et_desc_post"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="2dp"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/custom_edit_text"
-        android:backgroundTint="@color/colorPrimaryDark"
         android:hint="Description"
+        android:maxLength="45"
         android:paddingStart="10dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"

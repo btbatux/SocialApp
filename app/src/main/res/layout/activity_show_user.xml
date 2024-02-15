@@ -20,20 +20,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="User Profile"
-        android:textAlignment="center"
-        android:textColor="@color/bottomnavcolor"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="110dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="25dp"
         android:gravity="center"
         android:orientation="horizontal">
@@ -48,8 +38,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_vertical"
-                app:cardCornerRadius="50dp"
                 android:layout_marginRight="15dp"
+                app:cardCornerRadius="50dp"
                 app:cardPreventCornerOverlap="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -147,27 +137,30 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/btn_requestshowprofile"
                     android:layout_width="135dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginEnd="32dp"
                     android:background="@drawable/button_back_selector"
                     android:padding="3dp"
                     android:text="Follow"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-
-            </LinearLayout>
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </LinearLayout>
@@ -208,7 +201,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/grey" />
+        android:background="@color/bottomnavcolor2" />
 
 
     <TextView
@@ -245,7 +238,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/grey" />
+        android:background="@color/bottomnavcolor2" />
 
     <TextView
         android:layout_width="match_parent"
@@ -281,7 +274,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/grey" />
+        android:background="@color/bottomnavcolor2" />
 
     <TextView
         android:layout_width="match_parent"
@@ -318,7 +311,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/grey" />
+        android:background="@color/bottomnavcolor2" />
 
     <TextView
         android:layout_width="match_parent"
@@ -344,7 +337,7 @@
         android:shadowDx="0.0"
         android:shadowDy="0.0"
         android:shadowRadius="15"
-        android:text="******************************"
+        android:text="**************************"
         android:textAlignment="viewStart"
         android:textColor="#9E0000"
         android:textSize="15sp" />
@@ -355,7 +348,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/grey" />
+        android:background="@color/bottomnavcolor2" />
 
 
     <TextView
@@ -373,30 +366,39 @@
         android:visibility="gone" />
 
 
-    <Button
-        android:id="@+id/btn_sendmessage_showuser"
-        android:layout_width="190dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/button_back_selector"
-        android:text="Send Message"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/block_reporttv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Block/ Report" />
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btn_sendmessage_showuser"
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/button_back_selector"
+            android:text="Send Message"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/block_reporttv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/block_reporttv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="40dp"
+            android:text="Block / Report"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

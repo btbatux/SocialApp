@@ -158,14 +158,17 @@ public class ShowUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-
                     String url = websitetv.getText().toString();
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(url));
-                    startActivity(intent);
 
+                    if (!url.startsWith("https://")) {
+                        url = "https://" + url;
+                    }
+
+                    Intent intent2 = new Intent(Intent.ACTION_VIEW);
+                    intent2.setData(Uri.parse(url));
+                    startActivity(intent2);
                 } catch (Exception e) {
-                    Toast.makeText(ShowUser.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "Invalid Url", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -232,6 +235,14 @@ public class ShowUser extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        emailtv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phoneNumber = emailtv.getText().toString();
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
+                startActivity(dialIntent);
+            }
+        });
 
     }
 

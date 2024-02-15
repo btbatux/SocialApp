@@ -156,9 +156,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:padding="5dp"
             android:clickable="true"
             android:inputType="phone"
+            android:padding="5dp"
             android:text="Phone Number"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -198,7 +198,7 @@
         android:layout_marginTop="40dp"
         android:backgroundTint="#74D8FF"
         app:cardCornerRadius="85dip"
-        app:cardElevation="10dp">
+        app:cardElevation="9dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -255,6 +255,7 @@
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:text="Followers"
+                android:textSize="13sp"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_post_f1"

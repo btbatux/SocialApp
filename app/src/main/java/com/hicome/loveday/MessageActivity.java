@@ -614,7 +614,7 @@ public class MessageActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void SendMessage() {
-        String message = messageEt.getText().toString();
+        String message = messageEt.getText().toString().trim();
 
         Calendar cdate = Calendar.getInstance();
         SimpleDateFormat currentdate = new SimpleDateFormat("dd-MMMM-yyyy");
@@ -628,6 +628,7 @@ public class MessageActivity extends AppCompatActivity {
 
         if (message.isEmpty()) {
             Toast.makeText(this, "Cannot send empty message", Toast.LENGTH_SHORT).show();
+            return;
         }
         if (message.length() > 80) {
             messageEt.setError("max 80 character");

@@ -106,38 +106,4 @@ public class ImageActivity extends AppCompatActivity {
         });
     }
 
-    public void checkIncoming(){
-
-        checkVideocallRef = database.getReference("vc");
-
-
-        try {
-
-            checkVideocallRef.child(currentuid).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    if (snapshot.exists()){
-
-                        senderuid = snapshot.child("calleruid").getValue().toString();
-                        Intent intent = new Intent(ImageActivity.this,VideoCallinComing.class);
-                        intent.putExtra("uid",senderuid );
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }else {
-
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }catch (Exception e){
-
-            //   Toast.makeText(context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-    }}
+}

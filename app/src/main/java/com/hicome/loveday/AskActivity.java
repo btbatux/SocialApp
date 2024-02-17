@@ -54,7 +54,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 public class AskActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private static final int MAX_QUESTION_LENGTH = 75;
+    private static final int MAX_QUESTION_LENGTH = 90;
     String[] categories = {"Choose category", "Tech", "Health", "Education", "Food", "Sports", "News", "Fashion", "Beauty", "Lifestyle"};
     EditText questionEditText;
     TextView characterLimitAlert, categoryTextView;
@@ -88,7 +88,7 @@ public class AskActivity extends AppCompatActivity implements AdapterView.OnItem
         //Reklam isteğini oluştur Geçişli
         AdRequest adRequest = new AdRequest.Builder().build();
         // Ara reklamı yükle  Geçişli
-        InterstitialAd.load(this, "ca-app-pub-3940256099942544/1033173712", adRequest,
+        InterstitialAd.load(this, "ca-app-pub-8648170927904071/1746279598", adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
@@ -235,10 +235,6 @@ public class AskActivity extends AppCompatActivity implements AdapterView.OnItem
                         Toast.makeText(AskActivity.this, "Error: User data not found", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
-
-
     }
 
     @Override

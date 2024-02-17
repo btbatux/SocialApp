@@ -1,5 +1,4 @@
 package com.hicome.loveday;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -47,15 +46,14 @@ import com.hicome.loveday.Fragment4;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
-
 public class PostActivity extends AppCompatActivity {
-
     private static final int PICK_FILE = 1;
+    private static final int PICK_IMAGE = 1;
     private static final long MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
-
     private ImageView imageView;
     private ProgressBar progressBar;
-    private Uri selectedUri;
+    private Uri selectedImageUri;
+
     private EditText etdesc;
     private Button btnchoosefile, btnuploadfile;
     private String url, name;
@@ -121,25 +119,24 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void chooseImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // Intent.ACTION_GET_CONTENT kullanarak genel bir seçici başlatın
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(intent, PICK_FILE);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false); // Tek bir resim seçilmesine izin ver
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_FILE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            selectedUri = data.getData();
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            selectedImageUri = data.getData();
 
-            if (selectedUri.toString().contains("image")) {
-                Picasso.get().load(selectedUri).into(imageView);
-                imageView.setVisibility(View.VISIBLE);
-                type = "iv";
-            } else {
-                Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show();
-            }
+            // Picasso kütüphanesi kullanılarak seçilen resmi ImageView'a yükleyin
+            Picasso.get().load(selectedImageUri).into(imageView);
+            imageView.setVisibility(View.VISIBLE);
+            type = "iv"; // 'type' değişkeninizin amacına bağlı olarak
         } else {
             Toast.makeText(this, "No image chosen or operation cancelled", Toast.LENGTH_SHORT).show();
         }
@@ -180,10 +177,10 @@ public class PostActivity extends AppCompatActivity {
     private void Dopost() {
         final String desc = etdesc.getText().toString();
 
-        if (!TextUtils.isEmpty(desc) && selectedUri != null) {
+        if (!TextUtils.isEmpty(desc) && selectedImageUri != null) {
             progressBar.setVisibility(View.VISIBLE);
-            final StorageReference reference = storageReference.child(System.currentTimeMillis() + "." + getFileExt(selectedUri));
-            UploadTask uploadTask = reference.putFile(selectedUri);
+            final StorageReference reference = storageReference.child(System.currentTimeMillis() + "." + getFileExt(selectedImageUri));
+            UploadTask uploadTask = reference.putFile(selectedImageUri);
 
             uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -221,9 +218,9 @@ public class PostActivity extends AppCompatActivity {
                         postmember.setTime(time);
                         postmember.setUid(currentuid);
                         postmember.setUrl(url);
-                        postmember.setType(type.equals("iv") ? "iv" : "vv");
+                        postmember.setType("iv");
 
-                        DatabaseReference dbRef = type.equals("iv") ? db1 : db2;
+                        DatabaseReference dbRef = db1;
                         String id = dbRef.push().getKey();
                         dbRef.child(id).setValue(postmember);
 
@@ -246,5 +243,4 @@ public class PostActivity extends AppCompatActivity {
             Toast.makeText(this, "Please fill all Fields", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

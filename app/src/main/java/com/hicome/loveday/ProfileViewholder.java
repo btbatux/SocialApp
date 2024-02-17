@@ -19,6 +19,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -50,6 +53,8 @@ public class ProfileViewholder extends RecyclerView.ViewHolder {
     String email1 = resources.getString(R.string.admin_email_1);
     String email2 = resources.getString(R.string.admin_email_2);
     String email3 = resources.getString(R.string.admin_email_3);
+    DocumentReference documentReference;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public ProfileViewholder(@NonNull View itemView) {
         super(itemView);
@@ -98,12 +103,24 @@ public class ProfileViewholder extends RecyclerView.ViewHolder {
                     textViewName.setText("App user");
                     viewUserprofile.setVisibility(View.GONE);
 
+                } else
+                {
+                    documentReference = db.collection("user").document(uid);
+                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            String nameResult = task.getResult().getString("name");
+                            String profResult = task.getResult().getString("prof");
+                            String url = task.getResult().getString("url");
 
-                } else {
+                            Picasso.get().load(url).into(imageView);
+                            textViewName.setText(nameResult);
+                            textViewProfession.setText(profResult);
 
-                    Picasso.get().load(url).into(imageView);
-                    textViewProfession.setText(prof);
-                    textViewName.setText(name);
+
+                        }
+                    });
+
                 }
             }
 
@@ -118,7 +135,6 @@ public class ProfileViewholder extends RecyclerView.ViewHolder {
         // Firebase Realtime Database'den kullanıcıyı silme
         DatabaseReference realtimeRef = FirebaseDatabase.getInstance().getReference("All Users").child(userId);
         realtimeRef.removeValue();
-
         // Firestore'dan kullanıcıyı silme (Eğer Firestore kullanıyorsanız)
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         DocumentReference firestoreRef = firestore.collection("user").document(userId);

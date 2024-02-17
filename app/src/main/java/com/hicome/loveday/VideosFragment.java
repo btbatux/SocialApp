@@ -1,6 +1,5 @@
 package com.hicome.loveday;
 
-import android.net.Uri;
 import android.view.View;
 import android.widget.Toast;
 
@@ -8,14 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.upstream.BandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
-import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 

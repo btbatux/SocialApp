@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/white"
+    android:background="@drawable/updateprofileback"
     tools:context=".UpdatePhoto">
 
 
@@ -24,9 +24,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/iv_updatephoto"
-            android:src="@drawable/ic_baseline_add_24"
+            android:src="@drawable/baseline_add_a_photo_24"
             android:clickable="true"
-            android:scaleType="fitCenter"/>
+            android:scaleType="center"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -38,9 +38,8 @@
         android:id="@+id/btn_updatephoto"
         android:background="@drawable/button_back"
         android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_margin="10dp"/>
+        android:textColor="@color/ic_launcher_background"
+        android:textSize="18sp" />
 
     <ProgressBar
         android:layout_width="match_parent"

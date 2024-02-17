@@ -8,12 +8,14 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +23,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,31 +49,27 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 public class ReplyActivity extends AppCompatActivity {
-
-
     String uid, question, post_key, key, name_result;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference reference, reference2;
-
     TextView nametv, questiontv, tvreply;
     RecyclerView recyclerView;
     ImageView imageViewQue, imageViewUser;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference votesref, Allquetions;
-
     Boolean votechecker = false;
-
     DatabaseReference checkVideocallRef;
     String senderuid;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String currentuid = user.getUid();
+    private RewardedAd rewardedAd;
+    private final String TAG = "ReplyActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply);
 
-        checkIncoming();
         nametv = findViewById(R.id.name_reply_tv);
         questiontv = findViewById(R.id.que_reply_tv);
         imageViewQue = findViewById(R.id.iv_que_user);
@@ -102,6 +109,42 @@ public class ReplyActivity extends AppCompatActivity {
             }
         });
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        RewardedAd.load(this, "ca-app-pub-8648170927904071/4567662286",
+                adRequest, new RewardedAdLoadCallback() {
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error.
+                        Log.d(TAG, loadAdError.toString());
+                        rewardedAd = null;
+                    }
+
+                    @Override
+                    public void onAdLoaded(@NonNull RewardedAd ad) {
+                        rewardedAd = ad;
+                        Log.d(TAG, "Ad was loaded.");
+                        if (rewardedAd != null) {
+                            Activity activityContext = ReplyActivity.this;
+                            rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
+                                @Override
+                                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                                    // Handle the reward.
+                                    Log.d(TAG, "The user earned the reward.");
+                                    int rewardAmount = rewardItem.getAmount();
+                                    String rewardType = rewardItem.getType();
+                                }
+                            });
+                        } else {
+                            Log.d(TAG, "The rewarded ad wasn't ready yet.");
+                        }
+                    }
+                });
 
     }
 
@@ -244,40 +287,4 @@ public class ReplyActivity extends AppCompatActivity {
 
     }
 
-    public void checkIncoming(){
-
-        checkVideocallRef = database.getReference("vc");
-
-
-        try {
-
-            checkVideocallRef.child(currentuid).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    if (snapshot.exists()){
-
-                        senderuid = snapshot.child("calleruid").getValue().toString();
-                        Intent intent = new Intent(ReplyActivity.this,VideoCallinComing.class);
-                        intent.putExtra("uid",senderuid );
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }else {
-
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }catch (Exception e){
-
-            //   Toast.makeText(context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
 }

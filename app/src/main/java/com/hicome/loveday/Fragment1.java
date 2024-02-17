@@ -106,7 +106,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
         //Test reklam id'si(yayınlamadan önce değiştir)
         AdView adView = new AdView(getActivity());
         adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        adView.setAdUnitId("ca-app-pub-8648170927904071/2098112316");
         //Banner XML id'bağla
 
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -299,6 +299,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
                 startActivity(follower);
 
                 break;
+
             case R.id.tv_web_f1:
                 try {
                     String url = webEt.getText().toString();

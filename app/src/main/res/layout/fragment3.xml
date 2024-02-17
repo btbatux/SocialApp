@@ -12,11 +12,10 @@
         android:layout_margin="5dp"
         android:id="@+id/search_f3"
         android:background="@drawable/rounded_rectangle_comment"
-        android:padding="10dp"
+        android:padding="12dp"
         android:drawableLeft="@drawable/ic_grey_search_24"
-        android:paddingLeft="20dp"
         android:textColor="@color/black"
-        android:drawablePadding="10dp"/>
+        android:drawablePadding="12dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

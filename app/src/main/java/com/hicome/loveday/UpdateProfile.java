@@ -30,23 +30,22 @@ import com.squareup.picasso.Picasso;
 
 
 public class UpdateProfile extends AppCompatActivity {
-
     EditText etname,etBio,etProfession,etEmail,etWeb;
     Button button;
-    DocumentReference documentReference ;
+    DocumentReference documentReference;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    DatabaseReference checkVideocallRef;
-    String senderuid;
+    All_UserMmber allUserMmber;
+    DatabaseReference databaseReference;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String currentuid = user.getUid();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
-         checkIncoming();
+        allUserMmber = new All_UserMmber();
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String  currentuid= user.getUid();
         documentReference = db.collection("user").document(currentuid);
@@ -58,6 +57,7 @@ public class UpdateProfile extends AppCompatActivity {
         etWeb = findViewById(R.id.et_web_up);
         button = findViewById(R.id.btn_up);
 
+        databaseReference = database.getReference("All Users");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +70,6 @@ public class UpdateProfile extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-
 
         documentReference.get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -102,21 +100,23 @@ public class UpdateProfile extends AppCompatActivity {
     }
 
     private void updateProfile() {
-
         final String name = etname.getText().toString();
         final String bio = etBio.getText().toString();
         final String prof = etProfession.getText().toString();
         final String web = etWeb.getText().toString();
         final String email =etEmail.getText().toString();
 
+
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentuid1= user.getUid();
         final  DocumentReference sDoc = db.collection("user").document(currentuid1);
+
+
         db.runTransaction(new Transaction.Function<Void>() {
             @Override
             public Void apply(Transaction transaction) throws FirebaseFirestoreException {
               DocumentSnapshot snapshot = transaction.get(sDoc);
-
 
                 transaction.update(sDoc, "name",name );
                 transaction.update(sDoc,"prof",prof);
@@ -124,13 +124,25 @@ public class UpdateProfile extends AppCompatActivity {
                 transaction.update(sDoc,"web",web);
                 transaction.update(sDoc,"bio",bio);
 
+                // Realtime Database güncelleme
+                DatabaseReference allUsersRef = databaseReference.child(currentuid1);
+                allUsersRef.child("name").setValue(name);
+                allUsersRef.child("prof").setValue(prof);
+                allUsersRef.child("email").setValue(email);
+                allUsersRef.child("web").setValue(web);
+                allUsersRef.child("bio").setValue(bio);
+
+
 
                 // Success
                 return null;
+
             }
         }).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+
+
                 Toast.makeText(UpdateProfile.this, "updated", Toast.LENGTH_SHORT).show();
             }
         })
@@ -141,47 +153,7 @@ public class UpdateProfile extends AppCompatActivity {
                     }
                 });
 
-
-
-
-    }
-
-
-    public void checkIncoming(){
-
-        checkVideocallRef = database.getReference("vc");
-
-
-        try {
-
-            checkVideocallRef.child(currentuid).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    if (snapshot.exists()){
-
-                        senderuid = snapshot.child("calleruid").getValue().toString();
-                        Intent intent = new Intent(UpdateProfile.this,VideoCallinComing.class);
-                        intent.putExtra("uid",senderuid );
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }else {
-
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }catch (Exception e){
-
-            //   Toast.makeText(context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-
+        ////////////////////////
     }
 
 }

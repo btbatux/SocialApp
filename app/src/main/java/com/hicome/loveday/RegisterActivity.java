@@ -50,17 +50,18 @@ public class RegisterActivity extends AppCompatActivity {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                if (b){
+                if (b) {
+                    // Checkbox seçili ise şifreleri göster
                     passEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     confirm_pass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }else {
-
+                } else {
+                    // Checkbox seçili değilse şifreleri gizle
                     passEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     confirm_pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
             }
         });
+
 
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override

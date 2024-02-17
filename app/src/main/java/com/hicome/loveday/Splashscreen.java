@@ -23,8 +23,8 @@ import com.hicome.loveday.MainActivity;
 public class Splashscreen extends AppCompatActivity {
 
     ImageView imageView;
-    TextView nameTv,name2Tv;
-    long animTime = 1100;
+    TextView nameTv;
+    long animTime = 2100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -51,12 +51,12 @@ public class Splashscreen extends AppCompatActivity {
         //name2Tv = findViewById(R.id.tv_splash_name2);
         nameTv = findViewById(R.id.tv_splash_name);
 
-        ObjectAnimator animatorY = ObjectAnimator.ofFloat(imageView,"y",400f);
-        ObjectAnimator animatorname = ObjectAnimator.ofFloat(nameTv,"x",320f);
+        ObjectAnimator animatorY = ObjectAnimator.ofFloat(imageView,"y",800f);
+        //ObjectAnimator animatorname = ObjectAnimator.ofFloat(nameTv,"x",320f);
         animatorY.setDuration(animTime);
-        animatorname.setDuration(animTime);
+      //  animatorname.setDuration(animTime);
         AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(animatorY,animatorname);
+        animatorSet.playTogether(animatorY);
         animatorSet.start();
     }
 

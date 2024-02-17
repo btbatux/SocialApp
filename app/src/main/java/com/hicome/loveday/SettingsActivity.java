@@ -27,7 +27,7 @@ import java.util.Set;
 public class SettingsActivity extends AppCompatActivity {
 
     private Button darkModeButton;
-    private TextView showBlockedUsersTv, changePasswordTv, blocktv;
+    private TextView showBlockedUsersTv, changePasswordTv, blocktv, useremailadress;
     private boolean isDarkModeOn = false;
 
     @Override
@@ -37,14 +37,14 @@ public class SettingsActivity extends AppCompatActivity {
 
         initializeViews();
         setupListeners();
-        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
-        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn",false);
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
-        if (isDarkModeOn){
+        if (isDarkModeOn) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             darkModeButton.setText("Disable Dark Mode");
-        }else {
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             darkModeButton.setText("Enable Dark Mode");
         }
@@ -52,16 +52,16 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (isDarkModeOn){
+                if (isDarkModeOn) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    editor.putBoolean("isDarkModeOn",false);
+                    editor.putBoolean("isDarkModeOn", false);
                     editor.apply();
 
                     darkModeButton.setText("Enable Dark Mode");
-                }else {
+                } else {
 
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    editor.putBoolean("isDarkModeOn",true);
+                    editor.putBoolean("isDarkModeOn", true);
                     editor.apply();
 
                     darkModeButton.setText("Disable Dark Mode");
@@ -79,6 +79,11 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userEmailAdress = user.getEmail();
+        useremailadress.setText(userEmailAdress);
+
+
 
     }
 
@@ -88,6 +93,8 @@ public class SettingsActivity extends AppCompatActivity {
         showBlockedUsersTv = findViewById(R.id.blocktv);
         changePasswordTv = findViewById(R.id.updatepassword);
         blocktv = findViewById(R.id.blocktv);
+        useremailadress = findViewById(R.id.useremailadress);
+
     }
 
 

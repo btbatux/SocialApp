@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'com.google.firebase:firebase-firestore:24.10.1'
     implementation 'com.firebaseui:firebase-ui-database:6.2.0'
-
+    implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
     implementation 'com.google.android.exoplayer:exoplayer:2.15.0'
     implementation 'com.google.android.exoplayer:exoplayer-core:2.15.0'
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.15.0'

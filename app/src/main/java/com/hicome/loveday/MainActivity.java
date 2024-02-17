@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
-       checkIncoming(uid);
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -120,47 +118,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
-
-
-    public void checkIncoming(String uid){
-
-        checkVideocallRef = FirebaseDatabase.getInstance().getReference("vc");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String currentuid = user.getUid();
-
-
-        Context context = null;
-
-        try {
-
-            checkVideocallRef.child(currentuid).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    if (snapshot.exists()){
-
-                        senderuid = snapshot.child("calleruid").getValue().toString();
-                        Intent intent = new Intent(MainActivity.this,VideoCallinComing.class);
-                        intent.putExtra("uid",senderuid );
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }else {
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }catch (Exception e){
-
-            Toast.makeText(context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
-
 
 }

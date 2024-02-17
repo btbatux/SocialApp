@@ -58,11 +58,10 @@ public class UpdatePhoto extends AppCompatActivity {
     String currentuid;
     Button updateImage;
     private final static int PICK_IMAGE = 1;
-
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
     Uri imageuri, url;
+    All_UserMmber allUserMmber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,6 +201,8 @@ public class UpdatePhoto extends AppCompatActivity {
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
+
+
                     userDocRef.update("url", downloadUri.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

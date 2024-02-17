@@ -16,7 +16,7 @@
 
     <!--Fill Color of the Button-->
     <gradient android:angle="-90"
-        android:startColor="#7C34FF"
-        android:endColor="#FF6D41"  />
+        android:startColor="#7A33DF"
+        android:endColor="#D3FA3816"  />
 
 </shape>

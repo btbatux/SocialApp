@@ -42,7 +42,7 @@ public class ShowLikedUser extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_likedby);
         recyclerView.setHasFixedSize(true);
 
-        checkIncoming();
+
         recyclerView.setLayoutManager(new LinearLayoutManager(ShowLikedUser.this));
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
@@ -121,41 +121,5 @@ public class ShowLikedUser extends AppCompatActivity {
         recyclerView.setAdapter(firebaseRecyclerAdapter1);
     }
 
-    public void checkIncoming(){
-
-        checkVideocallRef = database.getReference("vc");
-
-
-        try {
-
-            checkVideocallRef.child(currentuid).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                    if (snapshot.exists()){
-
-                        senderuid = snapshot.child("calleruid").getValue().toString();
-                        Intent intent = new Intent(ShowLikedUser.this,VideoCallinComing.class);
-                        intent.putExtra("uid",senderuid );
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }else {
-
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }catch (Exception e){
-
-            //   Toast.makeText(context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
 
 }

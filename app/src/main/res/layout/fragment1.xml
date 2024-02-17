@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/softaqua"
     android:orientation="vertical">
 
     <com.google.android.gms.ads.AdView
@@ -14,13 +14,13 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+        app:adUnitId="ca-app-pub-8648170927904071/2098112316"></com.google.android.gms.ads.AdView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="@color/white"
+        android:background="@color/softaqua"
         app:cardElevation="11dp">
 
         <ImageButton
@@ -196,9 +196,9 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginTop="40dp"
-        android:backgroundTint="#74D8FF"
+        android:backgroundTint="@color/softaquacard"
         app:cardCornerRadius="85dip"
-        app:cardElevation="9dp">
+        app:cardElevation="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -255,8 +255,8 @@
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:text="Followers"
-                android:textSize="13sp"
                 android:textColor="@color/black"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_post_f1"
                 app:layout_constraintHorizontal_bias="0.164"

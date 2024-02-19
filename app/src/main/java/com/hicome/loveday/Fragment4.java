@@ -950,7 +950,7 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                 notificationsSender.SendNotifications();
 
             }
-        }, 3000);
+        }, 6000);
 
     }
 

@@ -11,9 +11,8 @@
 
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -21,7 +20,7 @@
         android:theme="@style/Theme.HiLove"
         tools:targetApi="34">
         <activity
-            android:name=".TermsAndConditionsActivity"
+            android:name=".MyApplication"
             android:exported="false" />
 
         <meta-data
@@ -53,21 +52,37 @@
         <activity android:name=".YourQuestions" />
         <activity android:name=".Related" />
         <activity android:name=".AskActivity" />
+
         <activity
             android:name=".ImageActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            />
+
         <activity
             android:name=".PrivacyActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            />
         <activity
+
             android:name=".UpdateProfile"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            />
         <activity
+
             android:name=".CreateProfile"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            />
+
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            />
+
+        <activity
+            android:name=".TermsAndConditionsActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            />
+
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

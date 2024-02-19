@@ -45,15 +45,8 @@ public class FcmNotificationsSender {
     }
 
     public void SendNotifications() {
-        if (mActivity != null) {
-            requestQueue = Volley.newRequestQueue(mActivity);
-            // ...
-            // İstek oluşturma ve gönderme kodunuz
-            // ...
-        } else {
-            // mActivity null ise hata işleme veya loglama
-            Log.e("FcmNotificationsSender", "Activity reference is null");
-        }
+        // MyApplication sınıfından RequestQueue nesnesini al
+        requestQueue = MyApplication.getInstance().getRequestQueue();
 
         JSONObject mainObj = new JSONObject();
         try {
@@ -61,23 +54,19 @@ public class FcmNotificationsSender {
             JSONObject notiObject = new JSONObject();
             notiObject.put("title", title);
             notiObject.put("body", body);
-            notiObject.put("icon", "icon"); // enter icon that exists in drawable only
+            notiObject.put("icon", "icon"); // drawable içindeki icon ismini girin
 
             mainObj.put("notification", notiObject);
-
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, postUrl, mainObj, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-
-                    // code run is got response
-
+                    // Cevap alındığında çalışacak kod
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    // code run is got error
-
+                    // Hata alındığında çalışacak kod
                 }
             }) {
                 @Override
@@ -88,6 +77,7 @@ public class FcmNotificationsSender {
                     return header;
                 }
             };
+            // İsteği RequestQueue'ye ekle
             requestQueue.add(request);
         } catch (JSONException e) {
             e.printStackTrace();

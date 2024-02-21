@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.hicome.loveday.ImageTab;
 import com.hicome.loveday.R;
-import com.hicome.loveday.VideoTab;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -32,10 +31,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position){
             case 0:
-                fragment = new ImageTab();
-                break;
             case 1:
-                fragment = new VideoTab();
+                fragment = new ImageTab();
                 break;
         }
         return fragment;

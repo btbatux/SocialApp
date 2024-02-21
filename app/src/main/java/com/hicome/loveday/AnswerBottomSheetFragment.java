@@ -1,5 +1,7 @@
 package com.hicome.loveday;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import android.app.Activity;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -48,6 +53,8 @@ public class AnswerBottomSheetFragment extends BottomSheetDialogFragment {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference Allquestions,ntref;
     String senderuid,userid,time,name,url,usertoken;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public String fcmKey;
 
 
     @Nullable
@@ -220,10 +227,29 @@ public class AnswerBottomSheetFragment extends BottomSheetDialogFragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         usertoken = snapshot.getValue(String.class);
                         if (usertoken != null && getActivity() != null) { // getActivity() null kontrolü
+
+                            db.collection("FcmKey")
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    fcmKey = document.getString("FcmKey");
+                                                }
+                                            } else {
+                                                Log.w(TAG, "Error getting documents.", task.getException());
+                                            }
+                                        }
+                                    });
+
+
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
+
+
                                     // getActivity() null kontrolü yapılıyor
                                     Activity activity = getActivity();
                                     if(activity != null){
@@ -231,7 +257,7 @@ public class AnswerBottomSheetFragment extends BottomSheetDialogFragment {
                                                 new FcmNotificationsSender(usertoken, "Social Media", name + " Commented on your post: " + answer,
                                                         getContext(), activity); // getActivity() kullanımı
 
-                                        notificationsSender.SendNotifications();
+                                        notificationsSender.SendNotifications(fcmKey);
                                     }
                                 }
                             },3000);

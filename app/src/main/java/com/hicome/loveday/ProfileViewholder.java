@@ -193,7 +193,6 @@ public class ProfileViewholder extends RecyclerView.ViewHolder {
                         proftv.setText(prof);
                     }
 
-
                 }
 
             }

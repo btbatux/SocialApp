@@ -1,5 +1,7 @@
 package com.hicome.loveday;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -9,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +50,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 public class ShowUser extends AppCompatActivity {
@@ -73,6 +78,7 @@ public class ShowUser extends AppCompatActivity {
     private AdView mAdView;
     int followercount, postiv, postvv;
     NewMember newMember;
+    public String fcmKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -750,16 +756,33 @@ public class ShowUser extends AppCompatActivity {
             }
         });
 
+        db.collection("FcmKey")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                fcmKey = document.getString("FcmKey");
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
+
                 FcmNotificationsSender notificationsSender =
                         new FcmNotificationsSender(usertoken, "new follow", name_result + " Sent You Follow request",
                                 getApplicationContext(), ShowUser.this);
 
-                notificationsSender.SendNotifications();
+                notificationsSender.SendNotifications(fcmKey);
 
             }
         }, 3000);
@@ -818,7 +841,7 @@ public class ShowUser extends AppCompatActivity {
                         new FcmNotificationsSender(usertoken, "new follow", name_result + " Started Following you",
                                 getApplicationContext(), ShowUser.this);
 
-                notificationsSender.SendNotifications();
+                notificationsSender.SendNotifications(fcmKey);
 
             }
         }, 3000);

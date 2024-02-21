@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.gun0912.tedpermission.PermissionListener;
@@ -65,6 +68,7 @@ import java.util.List;
 import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
+import static android.service.controls.ControlsProviderService.TAG;
 
 
 public class Fragment4 extends Fragment implements View.OnClickListener {
@@ -82,7 +86,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
     String currentuid = user.getUid();
 
     ReportClass reportClass;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
     NewMember newMember;
     LinearLayoutManager linearLayoutManager;
@@ -97,7 +100,8 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
     private String adminEmail1;
     private String adminEmail2;
     private String adminEmail3;
-
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public String fcmKey;
 
     @Nullable
     @Override
@@ -162,7 +166,12 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
         adminEmail3 = getResources().getString(R.string.admin_email_3);
 
 
+
+
     }
+
+
+
 
     @Override
     public void onClick(View view) {
@@ -938,19 +947,36 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                     }
                 });
 
+        db.collection("FcmKey")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                fcmKey = document.getString("FcmKey");
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
+
                 FcmNotificationsSender notificationsSender =
                         new FcmNotificationsSender(usertoken, "new like", name_result + " Liked Your post ",
                                 getContext(), getActivity());
 
-                notificationsSender.SendNotifications();
+                notificationsSender.SendNotifications(fcmKey);
 
             }
-        }, 6000);
+        }, 3500);
 
     }
 

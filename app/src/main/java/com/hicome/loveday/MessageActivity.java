@@ -1,5 +1,6 @@
 package com.hicome.loveday;
 import static android.app.PendingIntent.getActivity;
+import static android.service.controls.ControlsProviderService.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,7 +46,9 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.OnUserEarnedRewardListener;
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -54,6 +57,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -86,6 +93,8 @@ public class MessageActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 1;
     private RewardedAd rewardedAd;
     private final String TAG = "MainActivity";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public String fcmKey;
 
 
 
@@ -697,16 +706,34 @@ public class MessageActivity extends AppCompatActivity {
                     }
                 });
 
+        db.collection("FcmKey")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                fcmKey = document.getString("FcmKey");
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
+
+
                 FcmNotificationsSender notificationsSender =
                         new FcmNotificationsSender(usertoken, "new message", sender_name + ": " + message,
                                 getApplicationContext(), MessageActivity.this);
 
-                notificationsSender.SendNotifications();
+                notificationsSender.SendNotifications(fcmKey);
 
             }
         }, 3000);

@@ -1,5 +1,7 @@
 package com.hicome.loveday;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +28,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +39,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class Fragment3 extends Fragment {
 
@@ -47,7 +54,8 @@ public class Fragment3 extends Fragment {
     EditText editText;
     String currentUserId, usertoken;
     NewMember newMember;
-
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public String fcmKey;
 
 
     @Nullable
@@ -367,16 +375,34 @@ public class Fragment3 extends Fragment {
                     }
                 });
 
+        db.collection("FcmKey")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                fcmKey = document.getString("FcmKey");
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
+
                 FcmNotificationsSender notificationsSender =
                         new FcmNotificationsSender(usertoken, "new follow", name + " Started Following you",
                                 getContext(), getActivity());
 
-                notificationsSender.SendNotifications();
+                notificationsSender.SendNotifications(fcmKey);
 
             }
         }, 3000);

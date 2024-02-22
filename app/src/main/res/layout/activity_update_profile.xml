@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,36 +10,6 @@
     tools:context=".UpdateProfile">
 
 
-
-
-    <EditText
-        android:id="@+id/et_web_up"
-        android:layout_width="310dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_edit_text"
-        android:drawableLeft="@drawable/ic_baseline_public_24"
-        android:drawablePadding="7dp"
-        android:hint="Social Media"
-        android:paddingLeft="10dp"
-        android:textColor="@color/black"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="489dp" />
-
-    <EditText
-        android:id="@+id/et_bio_up"
-        android:layout_width="310dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/custom_edit_text"
-        android:drawableLeft="@drawable/ic_bio"
-        android:drawablePadding="7dp"
-        android:hint="Bio"
-        android:paddingLeft="10dp"
-        android:textColor="@color/black"
-        tools:layout_editor_absoluteX="55dp"
-        tools:layout_editor_absoluteY="373dp" />
-
     <EditText
         android:id="@+id/et_name_up"
         android:layout_width="310dp"
@@ -50,6 +19,7 @@
         android:drawableLeft="@drawable/usericon"
         android:drawablePadding="7dp"
         android:hint="Name"
+        android:maxLength="18"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
         android:textColor="@color/black"
@@ -57,13 +27,29 @@
         tools:layout_editor_absoluteY="255dp" />
 
     <EditText
+        android:id="@+id/et_bio_up"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_edit_text"
+        android:drawableLeft="@drawable/ic_bio"
+        android:maxLength="50"
+        android:drawablePadding="7dp"
+        android:hint="Bio"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="373dp" />
+
+    <EditText
         android:id="@+id/et_profession_up"
         android:layout_width="310dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/custom_edit_text"
         android:drawableLeft="@drawable/hobbies"
         android:drawablePadding="7dp"
+        android:maxLength="35"
         android:hint="Hobbies"
         android:paddingLeft="10dp"
         android:textColor="@color/black"
@@ -71,10 +57,25 @@
         tools:layout_editor_absoluteY="319dp" />
 
     <EditText
+        android:id="@+id/et_web_up"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_edit_text"
+        android:drawableLeft="@drawable/ic_baseline_public_24"
+        android:drawablePadding="7dp"
+        android:hint="Social Media"
+        android:paddingLeft="10dp"
+        android:maxLength="75"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="489dp" />
+
+    <EditText
         android:id="@+id/et_email_up"
         android:layout_width="310dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/custom_edit_text"
         android:drawableLeft="@drawable/call"
         android:drawablePadding="7dp"
@@ -82,6 +83,7 @@
         android:inputType="phone"
         android:paddingStart="5dp"
         android:paddingLeft="10dp"
+        android:maxLength="22"
         android:textColor="@color/black"
         tools:layout_editor_absoluteX="55dp"
         tools:layout_editor_absoluteY="428dp" />
@@ -96,5 +98,5 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="17sp"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>

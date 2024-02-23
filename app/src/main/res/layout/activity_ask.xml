@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:id="@+id/characterlimitalert"
             android:layout_height="wrap_content"
-            android:text="75 character limit"
+            android:text="90 character limit"
             android:layout_marginStart="14dp"
             android:textSize="15sp"
 

@@ -85,8 +85,6 @@ public class PostViewholder extends RecyclerView.ViewHolder {
 
     public void likeschecker(final String postkey) {
         likebtn = itemView.findViewById(R.id.likebutton_posts);
-
-
         likesref = database.getReference("post likes");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String uid = user.getUid();
@@ -105,7 +103,6 @@ public class PostViewholder extends RecyclerView.ViewHolder {
                     tv_likes.setText(Integer.toString(likescount) + " likes");
 
                 }
-
             }
 
             @Override
@@ -113,19 +110,12 @@ public class PostViewholder extends RecyclerView.ViewHolder {
 
             }
         });
-
     }
 
 
-
-
     public void commentchecker(final String postkey) {
-
         tv_comment = itemView.findViewById(R.id.tv_comment_post);
-
-
         commentref = database.getReference("All Posts").child(postkey).child("Comments");
-
         commentref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -133,10 +123,8 @@ public class PostViewholder extends RecyclerView.ViewHolder {
                 commentcount = (int) snapshot.getChildrenCount();
                 tv_comment.setText(Integer.toString(commentcount)+" Comments");
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
 
             }
         });

@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/red"
                     android:hint="time"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:id="@+id/tv_time_post"
                     android:paddingStart="5dp"
                     />
@@ -159,14 +159,14 @@
             android:textSize="15sp"
             android:text="Likes"
             android:id="@+id/tv_likes_post"
-            android:paddingStart="5dp"
+            android:paddingStart="6dp"
             />
 
         <TextView
             android:id="@+id/tv_comment_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
+            android:paddingStart="6dp"
             android:text="Comments"
             android:textColor="@color/textcolorgrey"
             android:textSize="15sp" />

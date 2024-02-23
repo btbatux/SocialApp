@@ -165,12 +165,7 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
         adminEmail2 = getResources().getString(R.string.admin_email_2);
         adminEmail3 = getResources().getString(R.string.admin_email_3);
 
-
-
-
     }
-
-
 
 
     @Override
@@ -430,13 +425,10 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
 
                 };
         firebaseRecyclerAdapter.startListening();
-
         recyclerView.setAdapter(firebaseRecyclerAdapter);
 
 
         // story firebase adapter
-
-
         FirebaseRecyclerOptions<StoryMember> options1 =
                 new FirebaseRecyclerOptions.Builder<StoryMember>()
                         .setQuery(storyRef, StoryMember.class)
@@ -491,7 +483,7 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.post_options);
 
-        TextView download = dialog.findViewById(R.id.download_tv_post);
+        //TextView download = dialog.findViewById(R.id.download_tv_post);
         TextView share = dialog.findViewById(R.id.share_tv_post);
         TextView delete = dialog.findViewById(R.id.delete_tv_post);
         TextView copyurl = dialog.findViewById(R.id.copyurl_tv_post);
@@ -627,7 +619,8 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
             }
         });
 
-        download.setOnClickListener(new View.OnClickListener() {
+        //Post download
+        /*download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -662,7 +655,7 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
 
                 dialog.dismiss();
             }
-        });
+        });*/
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override

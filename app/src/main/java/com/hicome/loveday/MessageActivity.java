@@ -1,4 +1,5 @@
 package com.hicome.loveday;
+
 import static android.app.PendingIntent.getActivity;
 import static android.service.controls.ControlsProviderService.TAG;
 
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,6 +41,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.ads.AdRequest;
@@ -67,16 +70,19 @@ import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.squareup.picasso.Picasso;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.ads.rewarded.RewardedAd;
+
 public class MessageActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ImageView imageView;
@@ -97,12 +103,10 @@ public class MessageActivity extends AppCompatActivity {
     public String fcmKey;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_message);
         super.onCreate(savedInstanceState);
-
 
 
         try {
@@ -252,9 +256,6 @@ public class MessageActivity extends AppCompatActivity {
     }
 
 
-
-
-
     private void Typing() {
 
         typingchecker = true;
@@ -392,16 +393,16 @@ public class MessageActivity extends AppCompatActivity {
 
         TextView unsend = dialog.findViewById(R.id.unsend_id);
         TextView details = dialog.findViewById(R.id.details_id);
-        TextView download = dialog.findViewById(R.id.option1_id);
+        //TextView download = dialog.findViewById(R.id.option1_id);
         TextView datetv = dialog.findViewById(R.id.date_mo);
         TextView timetv = dialog.findViewById(R.id.time_mo);
 
 
-        if (type.equals("t")) {
+      /*  if (type.equals("t")) {
             download.setVisibility(View.GONE);
         } else {
             download.setVisibility(View.VISIBLE);
-        }
+       } */
 
         details.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -555,7 +556,7 @@ public class MessageActivity extends AppCompatActivity {
         });
 
 
-        download.setOnClickListener(new View.OnClickListener() {
+       /* download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -591,7 +592,7 @@ public class MessageActivity extends AppCompatActivity {
                         }
 
 
-        });
+        });*/
 
 
         dialog.show();
@@ -603,7 +604,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
 
-    private void startDownloadProcess(String url) {
+    /*private void startDownloadProcess(String url) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
         request.setTitle("MessagePicDownload");
@@ -617,7 +618,7 @@ public class MessageActivity extends AppCompatActivity {
         DownloadManager manager = (DownloadManager) getApplicationContext().getSystemService(Context.DOWNLOAD_SERVICE);
         manager.enqueue(request);
         Toast.makeText(getApplicationContext(), "Downloading", Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
     String sender_name;
 
@@ -726,7 +727,6 @@ public class MessageActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-
 
 
                 FcmNotificationsSender notificationsSender =

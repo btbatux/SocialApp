@@ -23,6 +23,15 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,6 +72,7 @@ public class CommentsActivity extends AppCompatActivity {
     CommentsMember commentsMember;
     public String fcmKey;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +119,59 @@ public class CommentsActivity extends AppCompatActivity {
                 comment();
             }
         });
+
+        //MOBİL ADS REKLAM
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+
+            }
+        });
+
+        //Reklam isteğini oluştur Geçişli
+        AdRequest adRequest = new AdRequest.Builder().build();
+        // Ara reklamı yükle  Geçişli
+        InterstitialAd.load(this, "ca-app-pub-8648170927904071/1746279598", adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        mInterstitialAd = interstitialAd;
+                        Log.i("AdMob", "onAdLoaded");
+
+                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                // Reklam kapatıldığında yapılacak işlemler
+                                Log.d("AdMob", "Ad was dismissed.");
+                            }
+
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                // Reklam gösterimi başarısız olduğunda yapılacak işlemler
+                                Log.d("AdMob", "Ad failed to show.");
+                            }
+
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+                                // Reklam gösterildiğinde yapılacak işlemler
+                                Log.d("AdMob", "Ad showed fullscreen content.");
+                                mInterstitialAd = null;
+                            }
+                        });
+
+                        if (mInterstitialAd != null) {
+                            mInterstitialAd.show(CommentsActivity.this);
+                        }
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        Log.d("AdMob", "Ad failed to load.");
+                        mInterstitialAd = null;
+                    }
+                });
+
+
 
     }
 

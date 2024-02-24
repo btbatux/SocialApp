@@ -93,7 +93,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
         initViews();
         initializeFirebaseComponents();
         setupClickListeners();
-        loadData();
+
 
 
 
@@ -485,7 +485,7 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
             }
         } catch (Exception e) {
 
-            Toast.makeText(getActivity(), "error" + e, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(), "error" + e, Toast.LENGTH_SHORT).show();
         }
 
 
@@ -589,6 +589,8 @@ public class Fragment1 extends Fragment implements View.OnClickListener {
             }
         });
 
+
+        loadData();
 
     }
 

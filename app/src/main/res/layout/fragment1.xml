@@ -195,9 +195,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/softaquacard"
-        app:cardCornerRadius="85dip"
+        app:cardCornerRadius="80dip"
         app:cardElevation="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -207,7 +207,7 @@
 
             <Button
                 android:id="@+id/tv_addstories_f1"
-                android:layout_width="160dp"
+                android:layout_width="170dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_margin="12dp"

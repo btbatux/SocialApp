@@ -15,5 +15,7 @@
   <color name="bottomsheetcolor">#FFB84C</color>
   <color name="softaqua">#A0E9FF</color>
   <color name="softaquacard">#CDF5FD</color>
+  <color name="lightGrey">#d3d3d3</color>
+  <color name="darkGrey">#A9A9A9</color>
 
 </resources>

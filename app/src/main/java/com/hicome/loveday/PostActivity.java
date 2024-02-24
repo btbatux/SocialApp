@@ -1,4 +1,6 @@
 package com.hicome.loveday;
+import static android.app.PendingIntent.getActivity;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -25,6 +27,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,13 +55,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 public class PostActivity extends AppCompatActivity {
-    private static final int PICK_FILE = 1;
     private static final int PICK_IMAGE = 1;
     private static final long MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
     private ImageView imageView;
     private ProgressBar progressBar;
     private Uri selectedImageUri;
-
     private EditText etdesc;
     private Button btnchoosefile, btnuploadfile;
     private String url, name;
@@ -65,6 +71,7 @@ public class PostActivity extends AppCompatActivity {
     private String senderuid;
     private FirebaseUser user;
     private String currentuid;
+    //private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +89,7 @@ public class PostActivity extends AppCompatActivity {
         btnchoosefile = findViewById(R.id.btn_choosefile_post);
         btnuploadfile = findViewById(R.id.btn_uploadfile_post);
         etdesc = findViewById(R.id.et_desc_post);
+        //mAdView = findViewById(R.id.adView);
 
         storageReference = FirebaseStorage.getInstance().getReference("User posts");
 
@@ -116,6 +124,25 @@ public class PostActivity extends AppCompatActivity {
                 chooseImage();
             }
         });
+
+
+        //Show user banner reklam init.
+        /*MobileAds.initialize(getApplicationContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        //Test reklam id'si(yayınlamadan önce değiştir)
+        AdView adView = new AdView(getApplicationContext());
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-8648170927904071/2098112316");
+        //Banner XML id'bağla
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);*/
+
+
+
     }
 
     private void chooseImage() {
@@ -230,8 +257,11 @@ public class PostActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.INVISIBLE);
                         btnuploadfile.setText("Upload File");
                         Toast.makeText(PostActivity.this, "Post Uploaded", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(PostActivity.this, Fragment4.class));
-                        finish();
+                        Intent intent = new Intent(PostActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish(); // PostActivity'yi kapat
+
+
                     } else {
                         progressBar.setVisibility(View.INVISIBLE);
                         btnuploadfile.setText("Upload File");

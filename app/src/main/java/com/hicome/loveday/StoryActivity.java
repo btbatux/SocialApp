@@ -168,6 +168,10 @@ public class StoryActivity extends AppCompatActivity {
 
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(StoryActivity.this, "Story uploaded", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(StoryActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish(); // PostActivity'yi kapat
+
 
 
                     }

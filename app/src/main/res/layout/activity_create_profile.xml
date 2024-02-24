@@ -10,12 +10,13 @@
     tools:context=".CreateProfile">
 
 
+
     <androidx.cardview.widget.CardView
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginBottom="20dp"
         app:cardCornerRadius="50dp"
-        app:cardElevation="12dp"
+        app:cardElevation="10dp"
         app:cardPreventCornerOverlap="false">
 
         <ImageView
@@ -23,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/baseline_add_a_photo_24" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/addimage" />
 
     </androidx.cardview.widget.CardView>
 
@@ -65,7 +66,7 @@
         android:drawableStart="@drawable/ic_bio"
         android:drawablePadding="4dp"
         android:hint="Bio"
-        android:maxLength="60"
+        android:maxLength="120"
         android:paddingLeft="15dp"
         android:textColor="@color/white"
         android:textColorHint="@color/grey" />
@@ -103,7 +104,7 @@
     <Button
         android:id="@+id/btn_cp"
         android:layout_width="190dp"
-        android:layout_height="47dp"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_back_selector"
@@ -123,12 +124,11 @@
             android:id="@+id/checkBox_terms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="7dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="I am over 18 years old and agree to "
             android:textColor="@color/black" />
 
@@ -139,7 +139,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="Terms of Service."
-            android:textColor="#0065FF"
+            android:textColor="#0040FF"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -148,7 +148,7 @@
         android:id="@+id/progressbar_cp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:visibility="invisible" />
 
 </LinearLayout>

@@ -84,38 +84,53 @@ public class MainActivity extends AppCompatActivity {
                 new Fragment1()).commit();
 
 
+
+
+
+
     }
+
+    private String currentFragmentTag = null; // Şu an gösterilen fragment'in tag'ını tutacak
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNav = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+            String tag = null; // Seçilen fragment için bir tag tanımlayın
             Fragment selected = null;
+
             switch (item.getItemId()){
                 case R.id.profile_bottom:
+                    tag = "FRAGMENT_1";
                     selected = new Fragment1();
                     break;
 
                 case R.id.ask_bottom:
+                    tag = "FRAGMENT_2";
                     selected = new Fragment2();
                     break;
 
                 case R.id.queue_bottom:
+                    tag = "FRAGMENT_3";
                     selected = new Fragment3();
                     break;
 
                 case R.id.home_bottom:
+                    tag = "FRAGMENT_4";
                     selected = new Fragment4();
                     break;
-
             }
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,
-                    selected).commit();
+            // Eğer şu anki fragment bu fragment ise, yeniden yükleme yapmayın
+            if(tag.equals(currentFragmentTag)) {
+                return true; // Bu, fragment'in yeniden yüklenmesini engeller
+            }
 
+            // Yeni seçilen fragment'i yükle ve şu anki fragment tag'ini güncelle
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, selected, tag).commit();
+            currentFragmentTag = tag; // Şu anki fragment'in tag'ini güncelleyin
 
             return true;
-
         }
     };
 

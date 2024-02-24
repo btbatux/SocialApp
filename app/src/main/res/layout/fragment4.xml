@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="2dp"
     android:background="@color/white"
@@ -15,23 +15,30 @@
         android:orientation="horizontal">
 
 
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_baseline_add_24"
-            android:background="@drawable/create_post_back"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:id="@+id/createpost_f4"
-            android:layout_margin="4dp"
-            android:contentDescription="TODO" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            app:cardCornerRadius="30dp">
+
+            <ImageButton
+                android:id="@+id/createpost_f4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="4dp"
+                android:backgroundTint="@color/amp_transparent"
+                android:contentDescription="TODO"
+                android:scaleType="centerCrop"
+                android:src="@drawable/addimage"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_storyf4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="3dp"
-            android:id="@+id/rv_storyf4"/>
+            android:layout_margin="3dp" />
 
     </LinearLayout>
 

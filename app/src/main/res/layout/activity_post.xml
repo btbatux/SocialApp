@@ -4,36 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/softaquacard"
     tools:context=".PostActivity">
 
-
-    <ImageView
-        android:id="@+id/iv_post"
-        android:layout_width="410dp"
-        android:layout_height="376dp"
-        android:background="@android:color/transparent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/addimage"
-        tools:ignore="MissingConstraints" />
-
-
-    <Button
-        android:id="@+id/btn_choosefile_post"
-        android:layout_width="190dp"
-        android:layout_height="40dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/button_back_selector"
-        android:text="Choose any file"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="15sp"
+<!--
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8648170927904071/2098112316"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.791" />
+        app:layout_constraintTop_toBottomOf="@+id/pb_post"></com.google.android.gms.ads.AdView>-->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_post"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        app:cardCornerRadius="25dip"
+        app:cardElevation="10dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/iv_post"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginBottom="364dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/addpost"
+            app:layout_constraintBottom_toTopOf="@+id/adView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.cardview.widget.CardView>
 
     <ProgressBar
         android:id="@+id/pb_post"
@@ -45,41 +55,56 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.952" />
+        app:layout_constraintVertical_bias="0.901" />
+
+    <Button
+        android:id="@+id/btn_choosefile_post"
+        android:layout_width="190dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/button_back_selector"
+        android:text="Choose any file"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_desc_post" />
 
     <Button
         android:id="@+id/btn_uploadfile_post"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_margin="5dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/button_back"
         android:text="Upload"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.865" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_choosefile_post" />
 
     <EditText
         android:id="@+id/et_desc_post"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_margin="5dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/custom_edit_text"
         android:hint="Description"
-        android:maxLength="30"
+        android:maxLength="60"
         android:paddingStart="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_post" />
+        app:layout_constraintTop_toBottomOf="@+id/card_post" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

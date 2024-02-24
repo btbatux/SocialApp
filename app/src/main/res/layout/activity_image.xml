@@ -40,26 +40,27 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btn_edit_iv"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/button_back_selector"
-        android:text="Edit"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="18sp" />
-
-    <Button
         android:id="@+id/btn_del_iv"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="43dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/button_back_selector"
         android:text="Delete Image"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_edit_iv"
+        android:layout_width="250dp"
+        android:layout_height="43dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_back_selector"
+        android:text="Edit"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.hicome.loveday;
 
 import android.app.Application;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,6 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +22,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 public class Viewholder_Question extends RecyclerView.ViewHolder {
@@ -30,6 +36,10 @@ public class Viewholder_Question extends RecyclerView.ViewHolder {
     CardView cv_question;
     LinearLayout ll_question;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+
     public Viewholder_Question(@NonNull View itemView) {
         super(itemView);
     }
@@ -47,6 +57,7 @@ public class Viewholder_Question extends RecyclerView.ViewHolder {
 
        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
        String currentuid = user.getUid();
+       DocumentReference userRef = db.collection("user").document(userid); // "Users" koleksiyonunuzun adı ve kullanıcının ID'si
 
        blockref = database.getReference("Block users").child(currentuid);
 
@@ -58,7 +69,29 @@ public class Viewholder_Question extends RecyclerView.ViewHolder {
                    cv_question.setVisibility(View.GONE);
                    ll_question.setVisibility(View.GONE);
                }else {
-                   Picasso.get().load(url).into(imageView);
+                   userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                       @Override
+                       public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                           if (task.isSuccessful()) {
+                               DocumentSnapshot document = task.getResult();
+                               if (document != null && document.exists()) {
+                                   // Kullanıcının profil resmi URL'sini al
+                                   String profileImageUrl = document.getString("url"); // "profileImageUrl" alan adınız
+                                   if (profileImageUrl != null && !profileImageUrl.isEmpty()) {
+                                       // Picasso ile resmi ImageView'e yükle
+                                       Picasso.get().load(profileImageUrl).into(imageView);
+                                   }
+                               } else {
+                                   // Doküman yoksa veya başka bir hata oluştuysa
+                                   // Varsayılan bir resim kullanabilirsiniz veya hata yönetimi yapabilirsiniz
+                                   imageView.setImageResource(R.drawable.usericon); // Varsayılan avatar resmi
+                               }
+                           } else {
+                               // Sorgu başarısız olduysa
+                               Log.d("Firestore", "Error getting documents: ", task.getException());
+                           }
+                       }
+                   });
                    name_result.setText(name);
                    question_result.setText(question);
                    time_result.setText(time);

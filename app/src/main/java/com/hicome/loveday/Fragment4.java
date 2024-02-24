@@ -111,7 +111,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
         return view;
 
     }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -120,11 +119,9 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
         reference = database.getReference("All posts");
         likeref = database.getReference("post likes");
 
-
         reportClass = new ReportClass();
         storyRef = database.getReference("All story");
         referenceDel = database.getReference("story");
-
 
         recyclerView = getActivity().findViewById(R.id.rv_posts);
         recyclerView.setHasFixedSize(true);
@@ -133,9 +130,7 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
 
         documentReference = db.collection("user").document(currentuid);
 
-
         newMember = new NewMember();
-
 
         db1 = database.getReference("All images").child(currentuid);
         db2 = database.getReference("All videos").child(currentuid);
@@ -167,7 +162,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
 
     }
 
-
     @Override
     public void onClick(View view) {
 
@@ -197,7 +191,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                             }
 
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
@@ -385,7 +378,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                             }
                         });
 
-
                         holder.tv_likes.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -394,7 +386,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                                 startActivity(intent);
                             }
                         });
-
                         holder.commentbtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -404,12 +395,7 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                                 intent.putExtra("url", url);
                                 intent.putExtra("uid", userid);
                                 startActivity(intent);
-                            }
-                        });
-
-                    }
-
-
+                            }});}
                     @NonNull
                     @Override
                     public PostViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -418,15 +404,9 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                                 .inflate(R.layout.post_layout, parent, false);
 
                         return new PostViewholder(view);
-
-
-                    }
-
-
-                };
+                    }};
         firebaseRecyclerAdapter.startListening();
         recyclerView.setAdapter(firebaseRecyclerAdapter);
-
 
         // story firebase adapter
         FirebaseRecyclerOptions<StoryMember> options1 =
@@ -442,7 +422,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         final String currentUserid = user.getUid();
 
-
                         holder.setStory(getActivity(), model.getPostUri(), model.getName(), model.getTimeEnd(), model.getTimeUpload()
                                 , model.getType(), model.getCaption(), model.getUrl(), model.getUid());
 
@@ -453,12 +432,7 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                                 Intent intent = new Intent(getActivity(), ShowStory.class);
                                 intent.putExtra("u", userid);
                                 startActivity(intent);
-
-                            }
-                        });
-
-
-                    }
+                            }});}
 
                     @NonNull
                     @Override
@@ -468,15 +442,10 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                                 .inflate(R.layout.story_layout, parent, false);
 
                         return new StoryViewHolder(view);
-
-
-                    }
-                };
+                    }};
         firebaseRecyclerAdapterstory.startListening();
-
         recyclerViewstory.setAdapter(firebaseRecyclerAdapterstory);
     }
-
     void showDialog(String name, String url, String time, String userid, String type, String postkey, String useruri) {
 
         final Dialog dialog = new Dialog(getActivity());
@@ -541,12 +510,7 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
 
                                         Toast.makeText(getActivity(), "Updated", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
-                                    }
-                                });
-                    }
-                });
-            }
-        });
+                                    }});}});}});
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -560,7 +524,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
 
                             Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
                         }
-
                     }
 
                     @Override
@@ -578,7 +541,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
 
                             Toast.makeText(getActivity(), "Deleted", Toast.LENGTH_SHORT).show();
                         }
-
                     }
 
                     @Override
@@ -601,7 +563,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
 
@@ -615,47 +576,8 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                         });
 
                 dialog.dismiss();
-
             }
         });
-
-        //Post download
-        /*download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    if (!Environment.isExternalStorageManager()) {
-                        Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                        Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
-                        intent.setData(uri);
-                        startActivity(intent);
-                    } else {
-                        startDownloadProcess(type, url, name);
-                    }
-                } else {
-                    // TedPermission ile izin isteme işlemi
-                    TedPermission.with(getActivity())
-                            .setPermissionListener(new PermissionListener() {
-                                @Override
-                                public void onPermissionGranted() {
-                                    // İzinler verildiğinde indirme işlemi başlatılacak
-                                    startDownloadProcess(type, url, name);
-                                }
-
-                                @Override
-                                public void onPermissionDenied(List<String> deniedPermissions) {
-                                    // İzinler reddedildiğinde kullanıcıya bilgi verilecek
-                                    Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-                            .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-                            .check();
-                }
-
-                dialog.dismiss();
-            }
-        });*/
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -692,21 +614,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
 
     }
 
-    private void startDownloadProcess(String type, String url, String name) {
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-        request.setTitle("Download");
-        request.setDescription(type.equals("iv") ? "Downloading image...." : "Downloading video....");
-        request.allowScanningByMediaScanner();
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        String fileExtension = type.equals("iv") ? ".jpg" : ".mp4";
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, name + System.currentTimeMillis() + fileExtension);
-        DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-        manager.enqueue(request);
-        Toast.makeText(getActivity(), "Downloading", Toast.LENGTH_SHORT).show();
-    }
-
-
     private void showReportsheet(String name, String url, String useruri, String userid,
                                  String type, String postkey, String time) {
 
@@ -737,7 +644,6 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
 
             }
         });
-
 
         submitreport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -885,11 +791,8 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                     });
 
                 }
-
-
             }
         });
-
 
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -918,9 +821,8 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
             }
         } catch (Exception e) {
 
-            Toast.makeText(getActivity(), "error" + e, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "error" + e, Toast.LENGTH_SHORT).show();
         }
-
 
     }
 
@@ -955,22 +857,16 @@ public class Fragment4 extends Fragment implements View.OnClickListener {
                     }
                 });
 
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-
-
                 FcmNotificationsSender notificationsSender =
                         new FcmNotificationsSender(usertoken, "new like", name_result + " Liked Your post ",
                                 getContext(), getActivity());
-
                 notificationsSender.SendNotifications(fcmKey);
 
             }
         }, 3500);
-
     }
-
 }

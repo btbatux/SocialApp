@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,10 +24,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ImageActivity extends AppCompatActivity {
 
@@ -38,7 +43,6 @@ public class ImageActivity extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    DatabaseReference checkVideocallRef;
     String senderuid;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -67,22 +71,48 @@ public class ImageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-       btnDel.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
+        btnDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Firebase Storage'dan fotoğrafı sil
+                StorageReference photoRef = FirebaseStorage.getInstance().getReferenceFromUrl(url);
+                photoRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Fotoğraf başarıyla silindiğinde kullanıcıya bildir
+                        Toast.makeText(ImageActivity.this, "Photo deleted successfully", Toast.LENGTH_SHORT).show();
 
-               StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(url);
-               reference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                   @Override
-                   public void onSuccess(Void aVoid) {
+                        // ImageView'deki resmi temizle
+                        imageView.setImageResource(0); // ImageView'i temizle
 
-                       Toast.makeText(ImageActivity.this, "deleted", Toast.LENGTH_SHORT).show();
-                   }
-               });
+                        // Firestore'daki kullanıcı profil bilgisini sil veya güncelle
+                        Map<String, Object> updates = new HashMap<>();
+                        updates.put("url", FieldValue.delete()); // Fotoğrafın URL'sini sil
+                        // Eğer başka alanlar varsa ve silmek (veya güncellemek) istiyorsanız, burada belirtebilirsiniz.
+
+                        reference.update(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Bilgi başarıyla silindiğinde veya güncellendiğinde kullanıcıya bildir
+                                Toast.makeText(ImageActivity.this, "User info updated successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ImageActivity.this, "Error updating user info", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ImageActivity.this, "Error deleting photo", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
 
 
-           }
-       });
     }
 
     @Override

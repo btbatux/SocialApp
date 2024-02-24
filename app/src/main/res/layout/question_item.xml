@@ -56,13 +56,14 @@
                 android:layout_gravity="right"/>
 
             <TextView
+                android:id="@+id/name_que_item_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
+                android:hint="name"
+                android:maxLength="12"
                 android:paddingStart="5dp"
-                android:textColor="@color/textcolorgrey"
-                android:id="@+id/name_que_item_tv"
-                android:hint="name" />
+                android:textColor="#982500"
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -77,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="4dp"
                 android:gravity="center_vertical|right">
 
                 <TextView

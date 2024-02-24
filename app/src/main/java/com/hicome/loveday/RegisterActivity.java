@@ -66,20 +66,15 @@ public class RegisterActivity extends AppCompatActivity {
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String email = emailEt.getText().toString();
                 String pass = passEt.getText().toString();
                 String confirm_password = confirm_pass.getText().toString();
-
                 if (!TextUtils.isEmpty(email) || !TextUtils.isEmpty(pass) || !TextUtils.isEmpty(confirm_password)){
-
                     if (pass.equals(confirm_password)){
                         progressBar.setVisibility(View.VISIBLE);
-
                         mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-
                                 if (task.isSuccessful()){
                                     sendtoMain();
                                     progressBar.setVisibility(View.INVISIBLE);

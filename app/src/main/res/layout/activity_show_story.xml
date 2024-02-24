@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@color/black"
     tools:context=".ShowStory">
 
 
@@ -89,17 +89,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/button_back"
         android:drawableStart="@drawable/ic_baseline_remove_red_eye_24"
         android:drawablePadding="3dp"
-        android:padding="10dp"
+        android:padding="8dp"
         android:text="Views"
-        android:visibility="invisible"
-        android:layout_margin="5dp"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:drawableLeft="@drawable/ic_baseline_remove_red_eye_24" />
+        android:textSize="14sp"
+        android:visibility="invisible" />
 
     <ImageButton
         android:id="@+id/btn_delstory"

@@ -14,6 +14,7 @@
         android:id="@+id/stories"
         android:layout_width="match_parent"
         android:layout_height="8dp"
+
         android:layout_marginTop="5dp"
         android:layout_gravity="top" />
 
@@ -41,7 +42,7 @@
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:text="username"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:id="@+id/tv_uname_ss"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="70dp"/>
@@ -76,12 +77,12 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="640dp"
+        android:layout_marginTop="605dp"
         android:layout_marginBottom="72dp"
         android:textSize="15dp"
         android:fontFamily="sans-serif-light"
         android:text="caption"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
     <TextView
@@ -98,7 +99,7 @@
         android:drawablePadding="3dp"
         android:padding="8dp"
         android:text="Views"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:textSize="14sp"
         android:visibility="invisible" />
 

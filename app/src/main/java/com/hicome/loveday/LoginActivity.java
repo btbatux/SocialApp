@@ -123,44 +123,44 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String email = emailEt.getText().toString();
+                final String email = emailEt.getText().toString().trim(); // emailEt'den aldığınız metni trim edin
+
+                // E-posta adresinin boş olup olmadığını kontrol edin
+                if(email.isEmpty()){
+                    emailEt.setError("Email is required!"); // EditText'e bir hata mesajı ekleyin
+                    emailEt.requestFocus(); // EditText'e odaklanın
+                    return; // E-posta adresi boşsa, onClick metodundan çıkın
+                }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                 builder.setTitle("Reset Password")
-                        .setMessage("Are you sure to reset password")
-                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        .setMessage("Are you sure you want to reset your password?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
 
+                                // mAuth ile şifre sıfırlama e-postası gönderin
                                 mAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-
-                                        Toast.makeText(LoginActivity.this, "Reset Link sent", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Reset link sent to your email", Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(LoginActivity.this, "Error"+e, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
-
-
-
-
                             }
                         })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                        .setNegativeButton("No", null); // "No" butonuna basıldığında herhangi bir şey yapmamasını sağlayın
 
-                            }
-                        });
-                builder.create();
-                builder.show();
+                AlertDialog dialog = builder.create();
+                dialog.show(); // Diyalog gösterimi için create() çağrısından sonra show() çağrılmalı
 
             }
         });
+
 
 
 
